@@ -1,0 +1,36 @@
+@import '../../scss/variables.scss';
+
+.detail {
+    .main {
+        display: flex;
+
+        .img-container {
+            width: 25%;
+            margin-right: 10px;
+            padding: 60px;
+            height: 400px;
+    
+            img {
+                height: 100%;
+            }
+        }
+    
+        .data-container {
+            width: 65%;
+            margin-left: 10px;
+            padding-top: 60px;
+    
+            .back {
+                padding-top: 20px;
+                text-align: right;
+    
+                button {
+                    color: pink;
+                    border: none;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

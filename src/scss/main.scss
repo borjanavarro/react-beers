@@ -1,0 +1,86 @@
+@import './variables.scss';
+
+* {
+    font-family: 'Montserrat';
+    color: rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+
+    &:active,
+    &:focus {
+        outline: 0;
+    }
+}
+
+html, body, #root { 
+    height:100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 10px 0;
+}
+
+p,
+button {
+    font-size: $default-font-size;
+}
+
+#root {
+    display:flex; 
+    flex-direction:column; 
+}
+
+.see-more {
+    a {
+        color: pink;
+        text-align: right;
+    }
+}
+
+.container {
+    width: $page-width;
+    margin: 30px auto 120px auto;
+}
+
+.no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        margin-top: 100px;
+        text-align: center;
+    }
+}
+
+.slider-container {
+    width: 600px;
+    margin: 0 auto;
+
+    .slide-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 400px;
+
+        .slide-img-container {
+            width: 40%;
+            padding: 20px;
+            height: 100%;
+
+            img {
+                height: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        .slide-data-container {
+            width: 50%;
+        }
+    }
+}

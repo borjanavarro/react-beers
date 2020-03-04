@@ -1,0 +1,23 @@
+@import '../../scss/variables.scss';
+
+.search-list {
+    h1 {
+        margin: 10px 0;
+    }
+
+    h1 + h3 {
+        margin: 10px 0 40px;
+    }
+
+    .search-item {
+        margin-bottom: 60px;
+    
+        h2 {
+            margin: 5px 0;
+        }
+    
+        h4 {
+            margin: 10px 0 15px;
+        }
+    }
+}

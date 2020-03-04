@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+$fa-font-path : '~@fortawesome/fontawesome-free/webfonts';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+$page-width: 1000px;
+$default-font-size: 14px;
+$star-yellow: #ffeb00;
+
+$soft-gray: rgba(230, 230, 230, 1);
