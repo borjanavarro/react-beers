@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
 
 import './styles.scss';
 
 const Pagination = (props) => {
-    const {page, setPage, hasNext, url} = props;
+    const {page, hasNext, url} = props;
     const hasPrevious = page !== 1;
     let history = useHistory();
 
     const handleClick = (nextPage) => {
-        history.push(url + 'page=' + (nextPage));
-        setPage(nextPage);
+        history.push(url + 'page=' + nextPage);
     }
 
     return (

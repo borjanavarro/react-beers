@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { searchBeersByString } from '../../services/apiService';
 import SearchListItem from '../SearchListItem';
@@ -8,22 +9,26 @@ import Pagination from '../Pagination/Pagination';
 
 const PER_PAGE = 10;
 
-const SearchList = ({ searchString, queryPage }) => {
-    console.log(queryPage);
-    console.log(searchString);
-    const [page, setPage] = useState(queryPage ? queryPage : 1);
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const SearchList = () => {
+    let searchString = useQuery().get('q');
+    let queryParamPage = useQuery().get('page');
+    queryParamPage = queryParamPage ? parseInt(queryParamPage) : 1;
+
+    const [page, setPage] = useState(queryParamPage);
     const [hasNext, setHasNext] = useState(false);
     const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        console.log("page : " + page);
-        if (searchString) getSearchItems(searchString, page, PER_PAGE);
-    }, [searchString, page]);
+    useEffect( () => {
+        getSearchItems(searchString, queryParamPage, PER_PAGE);
+    }, [searchString, queryParamPage]);
 
-    useCallback(() => {
-        console.log('holaalalalalala');
-        setPage(1);
-    }, [searchString]);
+    useEffect( () => {
+        setPage(queryParamPage);
+    }, [queryParamPage]);
     
     async function getSearchItems(searchString, page, perPage) {
         const items = await searchBeersByString(searchString, page, perPage);
@@ -64,7 +69,7 @@ const SearchList = ({ searchString, queryPage }) => {
                 return <SearchListItem key={item.id} elem={item} />
             })}
         </div>
-        <Pagination page={page} setPage={setPage} hasNext={hasNext} url={'/search?q=' + searchString + '&'}/>
+        <Pagination page={page} hasNext={hasNext} url={'/search?q=' + searchString + '&'}/>
         </>
     )
 };
