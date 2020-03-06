@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
@@ -9,11 +9,12 @@ import favBeers from '../customHooks/favBeers';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { textEllipsis } from '../helpers/render-helpers';
+import { textEllipsis, onError } from '../helpers/render-helpers';
 
 const FavBeersPage = () => {
   const [beers, setBeers] = useState([]);
   const [,,,, getAllFavBeers] = favBeers();
+  const img = createRef();
 
   const getBeers = useCallback(async (ids) => {
     const fetchedBeers = await getBeersByIds(ids);
@@ -46,7 +47,7 @@ const FavBeersPage = () => {
               return <div key={id}>
                         <div className="slide-container">
                           <div className="slide-img-container">
-                            <img src={image_url} alt={name} className="slider-img"/>
+                            <img src={image_url ? image_url : 'error'} alt={name} className="slider-img" ref={img} onError={() => onError(img) } />
                           </div>
                           <div className="slide-data-container">
                             <h2>{name}</h2>

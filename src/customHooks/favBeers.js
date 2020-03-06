@@ -7,7 +7,7 @@ const FavBeers = () => {
 
     const isBeerFav = (id) => {
         const beersFavs = localStorage.getItem('beersFav');
-        return beersFavs[id] === true ? true : false;
+        return beersFavs[id] === true;
     }
 
     const toggleBeerFav = (id) => {
@@ -28,7 +28,7 @@ const FavBeers = () => {
 
         for ( const elem in beersFavs) {
             if ( beersFavs[elem] ) {
-            ids.push(elem);
+                ids.push(elem);
             }
         }
 

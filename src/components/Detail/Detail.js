@@ -1,14 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, createRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { getBeersByIds } from '../../services/apiService';
+import { onError } from '../../helpers/render-helpers';
 
 import './styles.scss';
 
 const Detail = () => {
     const { beerId } = useParams()
     const [beer, setBeer] = useState(null);
-    let history = useHistory();
+    const history = useHistory();
+    const img = createRef();
 
     const getBeer = useCallback(async (beerId) => {
         const fetchedBeer = await getBeersByIds([beerId]);
@@ -30,7 +32,7 @@ const Detail = () => {
         <h1>Beer detail</h1>
         <div className="main">
             <div className="img-container">
-                <img src={beer.image_url} alt="Beer img"/>
+                <img src={beer.image_url ? beer.image_url : 'error'} alt="Beer img" ref={img} onError={() => onError(img) } />
             </div>
             <div className="data-container">
                 <h2>{beer.name}</h2>

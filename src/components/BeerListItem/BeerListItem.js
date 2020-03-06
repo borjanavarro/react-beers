@@ -2,13 +2,10 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import favBeers from '../../customHooks/favBeers';
-import {textEllipsis} from '../../helpers/render-helpers';
-
-import errorImg from '../../img/beer.svg';
+import {textEllipsis, onError} from '../../helpers/render-helpers';
 
 const BeerListItem = (props) => {
-  const { item } = props;
-  let { id, name, tagline, description, image_url } = item;
+  const { id, name, tagline, description, image_url } = props.item;
   const [isBeerFav, toggleBeerFav, favChanged, setFavChanged] = favBeers();
   const img = React.createRef();
 
@@ -19,11 +16,6 @@ const BeerListItem = (props) => {
   const handleFavClick = (id) => {
       toggleBeerFav(id);
   }
-
-  const onError = () => {
-    img.current.src = errorImg;
-    img.current.parentNode.classList.add('error');
-  }
   
   return (
     <div className="beer-item">
@@ -31,7 +23,7 @@ const BeerListItem = (props) => {
         <i className={isBeerFav(id) ? 'fas fa-star' : 'far fa-star'}></i>
       </div>
       <div className="beer-image">
-        <img src={image_url ? image_url : 'error'} alt={name} ref={img} onError={onError} />
+        <img src={image_url ? image_url : 'error'} alt={name} ref={img} onError={() => onError(img) } />
       </div>
       <div className="beer-item-content">
         <h2>{name}</h2>
